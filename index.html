@@ -7,5 +7,45 @@
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <h1>Library</h1>
+    <button class="new-button">Add</button>
+    <dialog class="new-book-dialog">
+      <h2>Add new Book</h2>
+      <form class="new-book-form" id="newBookForm">
+        <label>
+          Title
+          <input type="text" name="title" id="title" />
+        </label>
+        <label>
+          Author
+          <input type="text" name="author" id="author" />
+        </label>
+        <label>
+          Image URL
+          <input type="text" name="image-url" id="imageUrl" />
+        </label>
+        <label>
+          Genre
+          <select name="genre" id="genre">
+            <option selected disabled>Genre</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="biography">Biography</option>
+          </select>
+        </label>
+        <label>
+          Release Year
+          <input type="number" name="release-year" id="releaseYear" />
+        </label>
+        <label>
+          Pages
+          <input type="number" name="pages" id="pages" />
+        </label>
+        <button class="cancel-button" formmethod="dialog">Cancel</button>
+        <button class="confirm-button">Add</button>
+      </form>
+    </dialog>
+    <div class="books"></div>
+  </body>
 </html>
