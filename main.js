@@ -7,7 +7,8 @@ const LIBRARY = [
     "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
     1999,
     "fantasy",
-    329
+    329,
+    false
   ),
   new Book(
     "harry potter 222",
@@ -15,7 +16,8 @@ const LIBRARY = [
     "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
     1999,
     "fantasy",
-    329
+    329,
+    true
   ),
 ];
 const books = document.querySelector(".books");
@@ -26,13 +28,14 @@ const confirmButton = document.querySelector(".confirm-button");
 
 // OBJECTS -------------------------------------------------
 
-function Book(title, author, imageUrl, releaseYear, genre, pages) {
+function Book(title, author, imageUrl, releaseYear, genre, pages, read) {
   this.title = title;
   this.author = author;
   this.imageUrl = imageUrl;
   this.releaseYear = releaseYear;
   this.genre = genre;
   this.pages = pages;
+  this.read = read;
 }
 
 // EVENT LISTENERS -----------------------------------------
@@ -77,8 +80,26 @@ function createBooks() {
             <p>${book.releaseYear}</p>
             <p>${book.pages}</p>
         </div>
+        <button class="book__read-button">${
+          book.read ? "Read" : "Not read"
+        }</button>
     </div>
     `;
+  });
+}
+
+function toggleReadStatus(index) {
+  LIBRARY[index].read = LIBRARY[index].read ? false : true;
+}
+
+function handleReadButtons() {
+  const readButtons = document.querySelectorAll(".book__read-button");
+  Array.from(readButtons).forEach((button) => {
+    button.addEventListener("click", () => {
+      const bookIndex = button.parentElement.dataset.index;
+      toggleReadStatus(bookIndex);
+      updateLibrary();
+    });
   });
 }
 
@@ -97,6 +118,7 @@ function updateLibrary() {
   resetLibrary();
   createBooks();
   handleRemoveButtons();
+  handleReadButtons();
 }
 
 function addBookToLibrary(formData) {
