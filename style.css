@@ -65,6 +65,10 @@ header {
   align-items: center;
 }
 
+.nav-close-button {
+  display: none;
+}
+
 nav {
   font-weight: bold;
   justify-self: end;
@@ -206,6 +210,9 @@ main {
     grid-template-columns: max-content 1fr;
     align-items: center;
     gap: var(--icon-gap);
+    &:hover {
+      background-color: var(--clr-primary-hover);
+    }
     & p {
       padding-right: calc(var(--icon-width) + var(--icon-gap));
       width: 100%;
@@ -326,6 +333,7 @@ footer {
       position: absolute;
       top: 1rem;
       right: 1rem;
+      display: block;
     }
     ul {
       flex-direction: column;
@@ -357,8 +365,5 @@ footer {
     & input {
       min-width: 100%;
     }
-  }
-  main {
-    padding-top: 4rem;
   }
 }
