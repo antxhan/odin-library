@@ -2,8 +2,8 @@
 
 const LIBRARY = [
   new Book(
-    "harry potter",
-    "jk rowling",
+    "Harry Potter",
+    "J. K. Rowling",
     "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
     1999,
     "fantasy",
@@ -11,10 +11,10 @@ const LIBRARY = [
     false
   ),
   new Book(
-    "harry potter 222",
-    "jk rowling",
-    "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
-    1999,
+    "The Two Towers: Lord of the Rings",
+    "J. R. R. Tolkien",
+    "https://m.media-amazon.com/images/I/51EgIMxu00L._SY445_SX342_QL70_FMwebp_.jpg",
+    1983,
     "fantasy",
     329,
     true
@@ -79,7 +79,25 @@ function createBooks() {
   LIBRARY.forEach((book, index) => {
     books.innerHTML += `
     <div class="book" data-index="${index}">
-        <button class="remove-button">Remove</button>
+        <button class="remove-button">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 7l16 0" />
+            <path d="M10 11l0 6" />
+            <path d="M14 11l0 6" />
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+          </svg>
+         </button>
          <img src="${book.imageUrl}" alt="" />
         <h3>${book.title}</h3>
         <p>${book.author}</p>
@@ -89,7 +107,37 @@ function createBooks() {
             <p>${book.pages}</p>
         </div>
         <button class="book__read-button">${
-          book.read ? "Read" : "Not read"
+          book.read
+            ? `
+          <svg  xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24" 
+            fill="currentColor" 
+            >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12.088 4.82a10 10 0 0 1 9.412 .314a1 1 0 0 1 .493 .748l.007 .118v13a1 1 0 0 1 -1.5 .866a8 8 0 0 0 -8 0a1 1 0 0 1 -1 0a8 8 0 0 0 -7.733 -.148l-.327 .18l-.103 .044l-.049 .016l-.11 .026l-.061 .01l-.117 .006h-.042l-.11 -.012l-.077 -.014l-.108 -.032l-.126 -.056l-.095 -.056l-.089 -.067l-.06 -.056l-.073 -.082l-.064 -.089l-.022 -.036l-.032 -.06l-.044 -.103l-.016 -.049l-.026 -.11l-.01 -.061l-.004 -.049l-.002 -.068v-13a1 1 0 0 1 .5 -.866a10 10 0 0 1 9.412 -.314l.088 .044l.088 -.044z" />
+          </svg>
+          <p>Read</p>`
+            : `
+            <svg xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+              <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+              <path d="M3 6l0 13" />
+              <path d="M12 6l0 13" />
+              <path d="M21 6l0 13" />
+            </svg>
+            <p>Not read</p>`
         }</button>
     </div>
     `;
@@ -115,9 +163,7 @@ function handleRemoveButtons() {
   const removeButton = document.querySelectorAll(".remove-button");
   Array.from(removeButton).forEach((button) => {
     button.addEventListener("click", (e) => {
-      console.log("clicked remove button");
-      console.log(e.target.parentElement.dataset.index);
-      removeBookFromLibrary(e.target.parentElement.dataset.index);
+      removeBookFromLibrary(e.currentTarget.parentElement.dataset.index);
     });
   });
 }
