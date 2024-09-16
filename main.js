@@ -6,7 +6,7 @@ const LIBRARY = [
     "J. K. Rowling",
     "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
     1999,
-    "fantasy",
+    "Fantasy",
     329,
     false
   ),
@@ -15,8 +15,8 @@ const LIBRARY = [
     "J. R. R. Tolkien",
     "https://m.media-amazon.com/images/I/51EgIMxu00L._SY445_SX342_QL70_FMwebp_.jpg",
     1983,
-    "fantasy",
-    329,
+    "Adventure",
+    541,
     true
   ),
 ];
@@ -69,6 +69,18 @@ confirmButton.addEventListener("click", (e) => {
   }
 });
 
+const nav = document.querySelector("nav");
+const navButton = document.querySelector(".nav-button");
+const navCloseButton = document.querySelector(".nav-close-button");
+
+navButton.addEventListener("click", () => {
+  nav.setAttribute("aria-expanded", "true");
+});
+
+navCloseButton.addEventListener("click", () => {
+  nav.setAttribute("aria-expanded", "false");
+});
+
 // FUNCTIONS -----------------------------------------------
 
 function resetLibrary() {
@@ -76,6 +88,10 @@ function resetLibrary() {
 }
 
 function createBooks() {
+  if (LIBRARY.length === 0) {
+    books.innerHTML = "<p>No books in library</p>";
+    return;
+  }
   LIBRARY.forEach((book, index) => {
     books.innerHTML += `
     <div class="book" data-index="${index}">
@@ -176,14 +192,14 @@ function updateLibrary() {
 }
 
 function addBookToLibrary(formData) {
-  LIBRARY.push(
+  LIBRARY.unshift(
     new Book(
       (this.title = formData.get("title")),
       (this.author = formData.get("author")),
       (this.imageUrl =
         formData.get("imageUrl") || "https://placehold.co/300x300"),
       (this.releaseYear = formData.get("releaseYear")),
-      (this.genre = formData.get("genre")),
+      (this.genre = formData.get("genre") || "Unknown"),
       (this.pages = formData.get("pages"))
     )
   );

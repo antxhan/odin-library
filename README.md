@@ -2,9 +2,10 @@
 
 TO-DO:
 
-- [ ] style
-- [ ] feat: enter read status in form
-- [ ] feat: empty library state.
-- [ ] fix: fixed book image size.
-- [ ] fix: empty genre default value
-- [ ] stlye: icons for read status buttons
+- [x] refactor.
+- [x] feat: empty library state.
+- [x] fix: empty genre default value
+- [x] stlye: icons for read status buttons
+- [x] style: dialog window.
+- [x] mobile nav
+- [ ] style: max width container.
