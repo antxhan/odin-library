@@ -25,6 +25,7 @@ const newButton = document.querySelector(".new-button");
 const newBookDialog = document.querySelector(".new-book-dialog");
 const newBookForm = document.querySelector(".new-book-form");
 const confirmButton = document.querySelector(".confirm-button");
+const closeButton = document.querySelector(".close-button");
 
 // OBJECTS -------------------------------------------------
 
@@ -45,6 +46,12 @@ newButton.addEventListener("click", () => {
   newBookDialog.showModal();
 });
 
+closeButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  newBookDialog.close();
+  newBookForm.reset();
+});
+
 // new book dialog on-close
 newBookDialog.addEventListener("close", (e) => {
   newBookForm.reset();
@@ -52,13 +59,14 @@ newBookDialog.addEventListener("close", (e) => {
 
 // cofirm new book button on-click
 confirmButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const form = document.forms.newBookForm;
-  const formData = new FormData(form);
-  addBookToLibrary(formData);
-
-  newBookDialog.close();
-  newBookForm.reset();
+  if (newBookForm.checkValidity()) {
+    e.preventDefault();
+    const form = document.forms.newBookForm;
+    const formData = new FormData(form);
+    addBookToLibrary(formData);
+    newBookDialog.close();
+    newBookForm.reset();
+  }
 });
 
 // FUNCTIONS -----------------------------------------------
@@ -126,7 +134,8 @@ function addBookToLibrary(formData) {
     new Book(
       (this.title = formData.get("title")),
       (this.author = formData.get("author")),
-      (this.imageUrl = formData.get("imageUrl")),
+      (this.imageUrl =
+        formData.get("imageUrl") || "https://placehold.co/300x300"),
       (this.releaseYear = formData.get("releaseYear")),
       (this.genre = formData.get("genre")),
       (this.pages = formData.get("pages"))

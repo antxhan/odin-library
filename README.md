@@ -2,8 +2,6 @@
 
 TO-DO:
 
-- [ ] Add a delete button to each book
-- [ ] Add a read status to each book
-- [ ] Add a toggle read status to each book
-- [ ] Add a remove book from library button
-- [ ] Make form validation
+- [x] make form validation.
+- [x] if no image added use a https://placehold.co/(width)x(height) placeholder.
+- [ ] feat: enter read status in form
