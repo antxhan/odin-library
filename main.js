@@ -1,6 +1,6 @@
 // GLOBAL --------------------------------------------------
 
-const library = [
+const LIBRARY = [
   new Book(
     "harry potter",
     "jk rowling",
@@ -10,7 +10,7 @@ const library = [
     329
   ),
   new Book(
-    "harry potter",
+    "harry potter 222",
     "jk rowling",
     "https://m.media-amazon.com/images/I/91eopoUCjLL._SX522_.jpg",
     1999,
@@ -18,6 +18,11 @@ const library = [
     329
   ),
 ];
+const books = document.querySelector(".books");
+const newButton = document.querySelector(".new-button");
+const newBookDialog = document.querySelector(".new-book-dialog");
+const newBookForm = document.querySelector(".new-book-form");
+const confirmButton = document.querySelector(".confirm-button");
 
 // OBJECTS -------------------------------------------------
 
@@ -30,15 +35,41 @@ function Book(title, author, imageUrl, releaseYear, genre, pages) {
   this.pages = pages;
 }
 
+// EVENT LISTENERS -----------------------------------------
+
+// add new book on-click
+newButton.addEventListener("click", () => {
+  newBookDialog.showModal();
+});
+
+// new book dialog on-close
+newBookDialog.addEventListener("close", (e) => {
+  newBookForm.reset();
+});
+
+// cofirm new book button on-click
+confirmButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  const form = document.forms.newBookForm;
+  const formData = new FormData(form);
+  addBookToLibrary(formData);
+
+  newBookDialog.close();
+  newBookForm.reset();
+});
+
 // FUNCTIONS -----------------------------------------------
 
-function createLibrary() {
-  const books = document.querySelector(".books");
-  books.innerHTML = ""; // reset books
-  library.forEach((book) => {
+function resetLibrary() {
+  books.innerHTML = "";
+}
+
+function createBooks() {
+  LIBRARY.forEach((book, index) => {
     books.innerHTML += `
-    <div class="book">
-        <img src="${book.imageUrl}" alt="" />
+    <div class="book" data-index="${index}">
+        <button class="remove-button">Remove</button>
+         <img src="${book.imageUrl}" alt="" />
         <h3>${book.title}</h3>
         <p>${book.author}</p>
         <div class="book__details">
@@ -51,8 +82,25 @@ function createLibrary() {
   });
 }
 
+function handleRemoveButtons() {
+  const removeButton = document.querySelectorAll(".remove-button");
+  Array.from(removeButton).forEach((button) => {
+    button.addEventListener("click", (e) => {
+      console.log("clicked remove button");
+      console.log(e.target.parentElement.dataset.index);
+      removeBookFromLibrary(e.target.parentElement.dataset.index);
+    });
+  });
+}
+
+function updateLibrary() {
+  resetLibrary();
+  createBooks();
+  handleRemoveButtons();
+}
+
 function addBookToLibrary(formData) {
-  library.push(
+  LIBRARY.push(
     new Book(
       (this.title = formData.get("title")),
       (this.author = formData.get("author")),
@@ -62,42 +110,18 @@ function addBookToLibrary(formData) {
       (this.pages = formData.get("pages"))
     )
   );
-  createLibrary(); // update library
+  updateLibrary();
 }
 
-function handleNewBookForm() {
-  const newButton = document.querySelector(".new-button");
-  const newBookDialog = document.querySelector(".new-book-dialog");
-  const newBookForm = document.querySelector(".new-book-form");
-  const confirmButton = document.querySelector(".confirm-button");
-
-  // opening dialog
-  newButton.addEventListener("click", () => {
-    newBookDialog.showModal();
-  });
-
-  // dialog on-close
-  newBookDialog.addEventListener("close", (e) => {
-    newBookForm.reset();
-  });
-
-  // cofirm button on-click
-  confirmButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const form = document.forms.newBookForm;
-    const formData = new FormData(form);
-    addBookToLibrary(formData);
-
-    newBookDialog.close();
-    newBookForm.reset();
-  });
+function removeBookFromLibrary(index) {
+  LIBRARY.splice(index, 1);
+  updateLibrary();
 }
-
-// INIT ----------------------------------------------------
 
 function init() {
-  createLibrary();
-  handleNewBookForm();
+  updateLibrary();
 }
+
+// ON LOAD ----------------------------------------------------
 
 init();
