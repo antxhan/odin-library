@@ -156,72 +156,76 @@
       </div>
     </header>
     <main>
-      <div class="main-header">
-        <h2>Library</h2>
-        <button class="new-button">Add</button>
+      <div class="main-container | container">
+        <div class="main-header">
+          <h2>Library</h2>
+          <button class="new-button">Add</button>
+        </div>
+        <dialog class="new-book-dialog">
+          <h2>Add new Book</h2>
+          <form class="new-book-form" id="newBookForm">
+            <label>
+              Title
+              <input type="text" name="title" id="title" required />
+            </label>
+            <label>
+              Author
+              <input type="text" name="author" id="author" required />
+            </label>
+            <label>
+              Image URL
+              <input type="text" name="image-url" id="imageUrl" />
+            </label>
+            <label>
+              Genre
+              <select name="genre" id="genre">
+                <option selected disabled></option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Horror">Horror</option>
+                <option value="Biography">Biography</option>
+              </select>
+            </label>
+            <label>
+              Release Year
+              <input
+                type="number"
+                name="releaseYear"
+                id="releaseYear"
+                maxlength="4"
+                required
+              />
+            </label>
+            <label>
+              Pages
+              <input type="number" name="pages" id="pages" required />
+            </label>
+            <button class="close-button" formmethod="dialog">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </button>
+            <button class="confirm-button">Add</button>
+          </form>
+        </dialog>
+        <div class="books"></div>
       </div>
-      <dialog class="new-book-dialog">
-        <h2>Add new Book</h2>
-        <form class="new-book-form" id="newBookForm">
-          <label>
-            Title
-            <input type="text" name="title" id="title" required />
-          </label>
-          <label>
-            Author
-            <input type="text" name="author" id="author" required />
-          </label>
-          <label>
-            Image URL
-            <input type="text" name="image-url" id="imageUrl" />
-          </label>
-          <label>
-            Genre
-            <select name="genre" id="genre">
-              <option selected disabled></option>
-              <option value="Fantasy">Fantasy</option>
-              <option value="Horror">Horror</option>
-              <option value="Biography">Biography</option>
-            </select>
-          </label>
-          <label>
-            Release Year
-            <input
-              type="number"
-              name="releaseYear"
-              id="releaseYear"
-              maxlength="4"
-              required
-            />
-          </label>
-          <label>
-            Pages
-            <input type="number" name="pages" id="pages" required />
-          </label>
-          <button class="close-button" formmethod="dialog">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M18 6l-12 12" />
-              <path d="M6 6l12 12" />
-            </svg>
-          </button>
-          <button class="confirm-button">Add</button>
-        </form>
-      </dialog>
-      <div class="books"></div>
     </main>
     <footer>
-      <p>Made by <a href="https://github.com/antxhan">Anton</a></p>
+      <div class="footer-container | container">
+        <p>Made by <a href="https://github.com/antxhan">Anton</a></p>
+      </div>
     </footer>
   </body>
 </html>

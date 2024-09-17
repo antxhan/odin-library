@@ -46,6 +46,8 @@ select:focus {
 header {
   padding: 0.5rem 1rem;
   background-color: var(--clr-primary);
+  display: flex;
+  justify-content: center;
 }
 
 .header-container {
@@ -130,13 +132,19 @@ nav {
 /* MAIN -------------------------------------------------- */
 
 main {
-  padding-inline: 1rem;
-  padding-block: 1rem;
   background-color: white;
+  margin-bottom: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.main-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: auto;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  width: 100%;
 }
 
 .main-header {
@@ -295,11 +303,16 @@ main {
 /* FOOTER ------------------------------------------------ */
 
 footer {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-container {
   align-self: center;
   width: 100%;
   text-align: center;
-  background-color: black;
-  color: white;
   padding: 1rem;
   & a {
     font-weight: bold;
@@ -308,6 +321,10 @@ footer {
 }
 
 /* UTILITY CLASSES --------------------------------------- */
+
+.container {
+  max-width: 1024px;
+}
 
 /* MEDIA QUERIES ---------------------------------------- */
 
@@ -365,5 +382,8 @@ footer {
     & input {
       min-width: 100%;
     }
+  }
+  .container {
+    width: 100%;
   }
 }
